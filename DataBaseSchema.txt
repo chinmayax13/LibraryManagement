@@ -1,0 +1,25 @@
+CREATE DATABASE librarydb;
+USE librarydb;
+CREATE TABLE books (
+id INT AUTO_INCREMENT PRIMARY KEY,
+title VARCHAR(100),
+author VARCHAR(100),
+quantity INT );
+USE librarydb;
+CREATE TABLE issuedbooks (
+	book_id INT NOT NULL,
+    student_name VARCHAR(100) not null,
+    issue_date DATE not null );
+    
+CREATE TABLE students (
+    name VARCHAR(100),
+    email VARCHAR(100) UNIQUE,
+    username VARCHAR(100) UNIQUE,
+    password VARCHAR(100)
+);
+CREATE TABLE librarians (
+    name VARCHAR(100),
+    email VARCHAR(100) UNIQUE,
+    username VARCHAR(100) UNIQUE,
+    password varchar(60)
+);

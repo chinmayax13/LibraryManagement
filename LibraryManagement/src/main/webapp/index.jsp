@@ -91,6 +91,10 @@
         <p>View Issued Books</p>
         <a href="showIssueBook.jsp">Go</a>
     </div>
+     <div class="box">
+        <p>View Students</p>
+        <a href="viewStudent.jsp">Go</a>
+    </div>
 </div>
 
 <footer>

@@ -1,32 +1,39 @@
 package com.library.servlet;
 
-import com.library.dao.DBConnection;
+import com.library.dao.StudentDAO;
+import com.library.model.Student;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.io.IOException;
-import java.sql.*;
+import java.util.List;
 
 public class RegisterStudentServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    private static final long serialVersionUID = 1L;
+
+    // Handles form submission (POST request)
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
-        String email = req.getParameter("email");
         String username = req.getParameter("username");
+        String email = req.getParameter("email");
         String password = req.getParameter("password");
 
-        try (Connection conn = DBConnection.getConnection()) {
-            String sql = "INSERT INTO students (name, email, username, password) VALUES (?, ?, ?, ?)";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, name);
-            stmt.setString(2, email);
-            stmt.setString(3, username);
-            stmt.setString(4, password);
+        Student student = new Student(name, username, email, password);
+        boolean success = StudentDAO.addStudent(student);
 
-            stmt.executeUpdate();
+        if (success) {
             resp.sendRedirect("success.jsp");
-        } catch (Exception e) {
-            e.printStackTrace();
-            resp.getWriter().println("Error: " + e.getMessage());
+        } else {
+            req.setAttribute("error", "Registration failed.");
+            req.getRequestDispatcher("studentRegister.jsp").forward(req, resp);
         }
+    }
+
+    // (Optional) List students when accessed via GET
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<Student> studentList = StudentDAO.getAllStudents();
+        req.setAttribute("students", studentList);
+        RequestDispatcher dispatcher = req.getRequestDispatcher("viewStudents.jsp");
+        dispatcher.forward(req, resp);
     }
 }

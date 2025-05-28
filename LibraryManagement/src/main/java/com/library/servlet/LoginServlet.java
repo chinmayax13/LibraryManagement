@@ -27,7 +27,13 @@ public class LoginServlet extends HttpServlet {
             if (rs.next()) {
                 HttpSession session = req.getSession();
                 session.setAttribute("user", rs.getString("username"));
-                resp.sendRedirect("index.jsp");
+                session.setAttribute("role", role);  // Store role if needed later
+                
+                if (role.equals("student")) {
+                    resp.sendRedirect("index2.jsp");  // Student home page
+                } else {
+                    resp.sendRedirect("index.jsp");   // Librarian home page
+                }
             } else {
                 resp.getWriter().println("Login failed. Invalid credentials.");
             }

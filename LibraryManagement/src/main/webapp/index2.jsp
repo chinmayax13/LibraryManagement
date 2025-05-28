@@ -1,11 +1,10 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Library Home</title>
-   
-
-     <style>
+    <title>Library Management System</title>
+    <style>
         body {
             font-family: Arial;
             background-color: lightgreen;
@@ -60,30 +59,34 @@
             margin-top:0px;
         }
     </style>
-   
 </head>
 <body>
-    <header><h1>Welcome to Library Management System</h1></header>
 
-    <div class="container">
-    	  
-    	    <div class="box">
-      		  <p>Register as Student</p>
-       		 <a href="registerStudent.jsp">Go</a>
-    	  </div>
-    	    <div class="box">
-      		  <p>Register as Librarian</p>
-       		 <a href="registerLibrarian.jsp">Go</a>
-    	  </div>
-    	 <br> <div class="box">
-      		  <p>Login</p>
-       		 <a href="login.jsp">Go</a>
-    	  </div>
-    	  
+<header>
+    <h1>Library Management System</h1>
+</header>
+
+<div class="container">
+    <div class="box">
+        <p>Borrow Book</p>
+        <a href="addBook.jsp">Go</a>
     </div>
 
-   <footer>
+    <div class="box">
+        <p>Return Book</p>
+        <a href="returnBook.jsp">Go</a>
+    </div>
+
+    <div class="box">
+        <p>View Books</p>
+        <a href="viewBooks.jsp">Go</a>
+    </div>
+    
+</div>
+
+<footer>
     &copy; <%= java.time.Year.now() %> Library Management System
-   </footer>
+</footer>
+
 </body>
 </html>
